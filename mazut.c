@@ -255,7 +255,10 @@ void main (void)
       {
 	if (icp_pool < 9) ReadFromICP(Prt.nmb_icp);else
 	if (Port[0].buf[0]==Key_true &&(icp_pool==16 || icp_pool==17))
-	   Display.evt=0;else
+  //01.05.2020 YN -----\\//-----
+	  {if (step==0) {Display.evt=0;}} //was: Display.evt=0;
+  //------------- -----//\\-----
+  else
 	if (icp_pool == 15 || Display.suspend)
 	{ /*обработка ответа от MMI подключенного к СОМ1*/
 	  ViewParamToMMI(&param);
@@ -321,7 +324,9 @@ void main (void)
       for (i=0;i<Max_icp_ain;i++) Ain[i].evt=0;
       for (i=0;i<Max_icp_aout;i++) if (Aout[i].evt<4) Aout[i].evt=0;
       for (i=0;i<Max_icp_dio;i++) Dio[i].evt=0;
-      mmi_flg_ver=1;/*проверка номера страницы индикатора*/
+      //01.05.2020 YN -----\\//-----
+     // mmi_flg_ver=1;/*проверка номера страницы индикатора*/
+      //------------- -----//\\-----
       if (flg_arc_h == 1) /* выполнение записи в часовой архив */
       {
 	flg_arc_h=0; WriteArchive(0);
